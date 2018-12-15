@@ -5,9 +5,7 @@ name = "pypi"
 
 [packages]
 flask = "*"
-sqlalchemy = "*"
-graphene-sqlalchemy = "*"
-flask-graphql = "*"
+python-dotenv = "*"
 
 [dev-packages]
 pytest = "*"

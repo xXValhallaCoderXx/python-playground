@@ -1,24 +1,25 @@
+import os
+from os import path
+from dotenv import load_dotenv
 from flask import Flask
-from flask_graphql import GraphQLView
 
-from models import db_session
-from schema import schema, Department
+# Create the .env file path
+dotenv_path = path.join(path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 app = Flask(__name__)
-app.debug = True
+# APP_SETTINGS is an ENV variable IE: config.DevelopmentConfig
+app.config.from_object(os.getenv('APP_SETTINGS'))
 
-app.add_url_rule(
-    '/graphql',
-    view_func=GraphQLView.as_view(
-        'graphql',
-        schema=schema,
-        graphiql=True # for having the GraphiQL interface
-    )
-)
+print(os.getenv('APP_SETTINGS'))
 
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    db_session.remove()
+@app.route("/")
+def hello_world():
+    return "Hello World"
 
-if __name__ == '__main__':
-    app.run()
+@app.route("/<name>")
+def hello_name(name):
+    return "Hello {}!".format(name)
+
+if __name__ == "__main__":
+  app.run()
