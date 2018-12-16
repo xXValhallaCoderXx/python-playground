@@ -21,7 +21,7 @@ class Production(object):
 
 class Testing(object):
     """
-    Production environment configurations
+    Testing environment configurations
     """
     DEBUG = True
     TESTING = True
