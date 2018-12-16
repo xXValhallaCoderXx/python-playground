@@ -25,7 +25,8 @@ class Testing(object):
     """
     DEBUG = True
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URL')
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 
 app_config = {

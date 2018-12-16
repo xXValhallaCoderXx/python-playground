@@ -17,9 +17,5 @@ def create_app(env_name):
   db.init_app(app)
 
   app.register_blueprint(todo_blueprint, url_prefix='/api/v1/todos') # add this line
-
-  @app.route("/", methods=["GET"])
-  def index():
-    return "The first endpoint"
   
   return app
