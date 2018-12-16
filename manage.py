@@ -1,24 +1,27 @@
-# We will use Flask-Migrate (part of Alembic) to manage DB Migrations
 import os
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
-from app import app, db
+from src.app import create_app, db
+from src.models.todo import Todo # Need to import the models
 
-app.config.from_object(os.getenv('APP_SETTINGS'))
+env_name = os.getenv('FLASK_ENV')
+app = create_app(env_name)
 
-migrate = Migrate(app, db)
-manager = Manager(app)
+migrate = Migrate(app=app, db=db)
 
-manager.add_command("db", MigrateCommand)
+manager = Manager(app=app)
+
+manager.add_command('db', MigrateCommand)
 
 @manager.command
-def init_database():
+def reset_database():
     """
-        Initialize the DB
+    Resets the DB and Adds User Roles
     """
     db.drop_all()
     db.create_all()
+    print('DB Reset')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   manager.run()
