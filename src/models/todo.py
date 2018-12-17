@@ -1,4 +1,4 @@
-from . import db_session, Base
+from ..db import db_session, Base
 from datetime import datetime
 from marshmallow import fields, Schema
 from sqlalchemy import Column, Integer, String, Boolean, DateTime

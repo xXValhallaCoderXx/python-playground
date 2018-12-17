@@ -17,7 +17,7 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def reset_database():
     """
-    Resets the DB and Adds User Roles
+    Resets the DB
     """
     db.drop_all()
     db.create_all()
