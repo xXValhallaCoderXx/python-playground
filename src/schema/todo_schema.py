@@ -1,5 +1,5 @@
 from graphene_sqlalchemy import SQLAlchemyObjectType
-from ..models.todo import Todo as TodoModel
+from ..models import Todo as TodoModel
 from ..utils import input_to_dictionary
 from ..db import db_session
 import graphene
