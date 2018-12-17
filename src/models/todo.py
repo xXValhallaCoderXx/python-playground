@@ -49,14 +49,12 @@ class Todo(Base):
 
   
   def __repr(self):
-    # Allows for a human printable version of the User Model
-    # Just returning the ID for now
     return '<id {}>'.format(self.id)
 
 
 class TodoSchema(Schema):
   """
-  User Schema
+  Todo Schema
   """
   id = fields.Int(dump_only=True)
   text = fields.Str(required=True)

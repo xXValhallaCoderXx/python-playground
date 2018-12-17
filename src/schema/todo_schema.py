@@ -4,8 +4,6 @@ from ..utils import input_to_dictionary
 from ..db import db_session
 import graphene
 
-
-# Create a generic class to mutualize description of people attributes for both queries and mutations
 class TodoAttribute:
     text = graphene.String(description="The description of the todo")
 
