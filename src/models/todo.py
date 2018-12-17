@@ -1,18 +1,19 @@
-from . import db
+from . import db_session, Base
 from datetime import datetime
 from marshmallow import fields, Schema
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
 
-class Todo(db.Model):
+class Todo(Base):
   """
   Todo Model
   """
   __tablename__ = "todos"
 
-  id = db.Column(db.Integer, primary_key=True)
-  text = db.Column(db.String(128), nullable=False)
-  completed = db.Column(db.Boolean, nullable=False)
-  created_at = db.Column(db.DateTime)
-  modified_at = db.Column(db.DateTime)
+  id = Column(Integer, primary_key=True)
+  text = Column(String(128), nullable=False)
+  completed = Column(Boolean, nullable=False)
+  created_at = Column(DateTime)
+  modified_at = Column(DateTime)
 
   # Class constructor
   def __init__(self, data):
@@ -25,18 +26,18 @@ class Todo(db.Model):
     self.modified_at = datetime.utcnow()
 
   def save(self):
-    db.session.add(self)
-    db.session.commit()
+    db_session.add(self)
+    db_session.commit()
 
   def delete(self):
-    db.session.delete(self)
-    db.session.commit()
+    db_session.delete(self)
+    db_session.commit()
 
   def update(self, data):
     for key, item in data.items():
       setattr(self, key, item)
     self.modified_at = datetime.utcnow()
-    db.session.commit()
+    db_session.commit()
 
   @staticmethod
   def get_all_todos():
